@@ -20,15 +20,18 @@ private:
 bool haPerso = false;
 Griglia griglia;
 vector<Nave> navi;
+string nome;
 
 public:
 
-  Giocatore(Griglia,Portaerei, Corazzata, Incrociatore, Sottomarino, Cacciatorpediniere);
+  Giocatore(Griglia,Portaerei, Corazzata, Incrociatore, Sottomarino, Cacciatorpediniere, string);
   Griglia getGriglia() const;
   bool gethaPerso() const;
   void posiziona();
-  void incassa(int*);
+  bool incassa(int*);
   int* spara();
+  void feedback(bool, int*);
+  string getNome() const;
 
 
 

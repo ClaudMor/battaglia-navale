@@ -24,16 +24,20 @@ Sottomarino s1, s2;
 Cacciatorpediniere ct1, ct2;
 
 
-Giocatore g1(gr1, p1, c1, i1, s1, ct1);
-Giocatore g2(gr2, p2, c2, i2, s2, ct2);
-gr1.draw();
+Giocatore g1(gr1, p1, c1, i1, s1, ct1, "Giocatore1");
+Giocatore g2(gr2, p2, c2, i2, s2, ct2, "Giocatore2");
+
 g1.posiziona();
-/*g2.posiziona();
+g2.posiziona();
 
 while(!g1.gethaPerso() && !g2.gethaPerso()){
-  g2.incassa(g1.spara());
+  int* a = g1.spara();
+  g1.feedback(g2.incassa(a),a);
+  delete[] a;
   if(!g2.gethaPerso()){
-  g1.incassa(g2.spara());
+    int*b = g2.spara();
+  g2.feedback(g1.incassa(b),b);
+  delete[] b;
 }
 }
 
@@ -42,7 +46,7 @@ if(g1.gethaPerso()){
 }
 else{
   cout<<"Giocatore1 ha vinto"<<endl;
-}*/
+}
 
 
 

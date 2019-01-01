@@ -40,9 +40,11 @@ cout<<"Posizionamento "<<nave.nome<<": inserire v x y affinchè la nave sia disp
 
 input>>setw(2)>>nave.orient;
 input.ignore();
-input>>setw(2)>>nave.coord[1];
+input>>setw(2)>>nave.coord[0];
 input.ignore();
-input>>setw(2)>>nave.coord[2];
+input>>setw(2)>>nave.coord[1];
+
+cout<<"(Nave, >>) 47: "<<nave.nome<<": Nave.getOrient() = "<<nave.getOrient()<<" nave.getCoord()[0] = "<<nave.getCoord()[0]<<" nave.getCoord()[1] = "<<nave.getCoord()[1]<<endl;
 
 return input;
 

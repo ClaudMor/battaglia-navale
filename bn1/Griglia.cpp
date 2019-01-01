@@ -30,8 +30,8 @@ size = 8;
     delete[] m1[i];
     delete[] m2[i];
   }
-  delete m1;
-  delete m2;
+  delete[] m1;
+  delete[] m2;
 }*/
 
 void Griglia::setm1(char o,int x, int y){
@@ -91,12 +91,12 @@ cout<<i<<" ";
   void Griglia::draw() const
   {
 
- cout<<"  Your fleet"<<"              "<<"Enemy's fleet"<<endl<<endl;
+ cout<<"  La tua flotta"<<"          "<<"Il mare dell'avversario"<<endl<<endl;
  linea1();
  for(int i = 0; i<8; i++){
     linea2(i);
       }
-      cout<<endl<<"Legenda: "<<endl<<" _"<<endl<<"I_I = casella vuota/ignota"<<endl<<"IxI = blocco nave"<<endl<<"I0I = blocco nave distrutto"<<endl<<"ImI = colpo mancato"<<endl;
+      cout<<endl<<"Legenda: "<<endl<<" _"<<endl<<"I_I = casella vuota/ignota"<<endl<<"IxI = blocco nave"<<endl<<"I0I = blocco nave distrutto"<<endl<<"ImI = colpo mancato"<<endl<<endl;
     }
 
     bool Griglia::isX() const {

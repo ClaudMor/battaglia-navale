@@ -13,5 +13,6 @@ Cacciatorpediniere::Cacciatorpediniere(){
 }
 
 Cacciatorpediniere::~Cacciatorpediniere(){
+  cout<<"(Cacciatorpediniere) 16: destructor called"<<endl;
   delete[] this -> coord;
 }

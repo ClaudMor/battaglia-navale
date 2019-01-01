@@ -11,9 +11,10 @@ using std::cin;
 using std::endl;
 
 
-Giocatore::Giocatore(Griglia grgl, Portaerei p, Corazzata c, Incrociatore i, Sottomarino s, Cacciatorpediniere ct){
+Giocatore::Giocatore(Griglia grgl, Portaerei p, Corazzata c, Incrociatore i, Sottomarino s, Cacciatorpediniere ct, string name){
   cout<<"(Giocatore) 12: constructor called"<<endl;
   this -> griglia = grgl;
+  this -> nome = name;
   this -> navi.push_back(p);
   this -> navi.push_back(c);
   this -> navi.push_back(i);
@@ -24,76 +25,100 @@ Giocatore::Giocatore(Griglia grgl, Portaerei p, Corazzata c, Incrociatore i, Sot
 void Giocatore::posiziona(){
   bool intersez = false;
   vector<Nave>::iterator it;
-  //for(it = navi.begin(); it != navi.end(); it++){
+  for(it = navi.begin(); it != navi.end(); it++){
     std::system("cls");
+    cout<<"turno: "<<getNome()<<endl;
     griglia.draw();
-  /*  do {
+    do {
       if(intersez){
         cout<<"intersezione, per favore riposiziona l'ultima nave"<<endl;
       }
       cin >> *it;
       for(int i = 0; i < (*it).getSize() ; i++){
-        if((*it). getOrient() == 'v'){
-        if(griglia.getm1((*it).getCoord()[0], (*it).getCoord()[1] + i) != '_' ){
-          intersez == true;
+        if((*it). getOrient() == 'o'){
+        if(griglia.getm1((*it).getCoord()[0], (*it).getCoord()[1] + i) != '_'  || (*it).getCoord()[0]>7 ||  (*it).getCoord()[0]<0 ||  (*it).getCoord()[1]<0 ||((*it).getCoord()[1] + (*it).getSize() - 1)>7 ){
+          intersez = true;
           break;
         }
        }
-       if( (*it).getOrient() == 'o'){
-         if(griglia.getm1((*it).getCoord()[0] + i, (*it).getCoord()[1]) != '_' ){
-           intersez == true;
+       if( (*it).getOrient() == 'v'){
+         if(griglia.getm1((*it).getCoord()[0] + i, (*it).getCoord()[1]) != '_' || ((*it).getCoord()[0] + (*it).getSize() - 1)>7 ||  (*it).getCoord()[0]<0 ||  (*it).getCoord()[1]<0 || (*it).getCoord()[1]>7){
+           intersez = true;
            break;
          }
        }
-      }
+      intersez = false;
+     }
     } while( intersez );
     intersez = false;
-    if((*it).getOrient() == 'v'){
+    if((*it).getOrient() == 'o'){
         for(int i = 0; i < (*it).getSize() ; i++){
           griglia.setm1('x', (*it).getCoord()[0], (*it).getCoord()[1] + i);
         }
-    } else if((*it).getOrient() == 'o') {
+    }
+    if((*it).getOrient() == 'v') {
       for(int i = 0; i < (*it).getSize() ; i++){
         griglia.setm1('x', (*it).getCoord()[0] + i, (*it).getCoord()[1]);
       }
     }
-  }*/
+  }
 }
 
-void Giocatore::incassa(int *a){
+bool Giocatore::incassa(int *a){
+  bool colpito = true;
   if(griglia.getm1(a[0], a[1]) == '_'){
   griglia.setm1('m', a[0], a[1]);
   cout<<"Mancato!"<<endl;
+  colpito = false;
  }
  if(griglia.getm1(a[0], a[1]) == 'x'){
      griglia.setm1('0', a[0], a[1]);
      cout<<"Colpito!";
- }
- if(griglia.getm1(a[0], a[1]) == '0'){
-   cout<<"Sprecato!";
+     colpito = true;
  }
 
  if(!griglia.isX()){
    haPerso = true;
  }
+return colpito;
+
 }
 
 int* Giocatore::spara(){
-
+  std::system("cls");
+  cout<<"turno: "<<getNome()<<endl;
   griglia.draw();
+  cout<<getNome()<< " decidi dove sparare!"<<endl;
 
   int* a = new int[2];
-  cout<<"Coordinata x del proiettile =  ";
+  cout<<"riga del proiettile =  ";
   cin>> a[0];
-  cout<<endl<<"Coordinata y del proiettile = ";
+  cout<<endl<<"colonna del proiettile = ";
   cin>> a[1];
   cout<<endl;
 
-  griglia.setm2('x',a[0], a[1]);
+
 
   return a;
 }
 
 bool Giocatore::gethaPerso() const{
   return haPerso;
+}
+
+Griglia Giocatore::getGriglia() const{
+  return this -> griglia;
+}
+
+void Giocatore::feedback(bool colpito, int* a){
+  if(colpito == true){
+    griglia.setm2('0',a[0],a[1]);
+  }
+  if(colpito == false){
+    griglia.setm2('m',a[0],a[1]);
+  }
+}
+
+string Giocatore::getNome() const{
+  return this -> nome;
 }

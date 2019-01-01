@@ -17,7 +17,7 @@ void linea2(int) const;
 
 public:
 Griglia();
-/*~Griglia();*/
+//~Griglia();
 void draw() const;
 void setm1(char,int,int);
 void setm2(char,int,int);
