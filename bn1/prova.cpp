@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 #include "Griglia.h"
 #include "Nave.h"
 #include "Portaerei.h"
@@ -8,13 +9,14 @@
 #include "Sottomarino.h"
 #include "Cacciatorpediniere.h"
 #include "Giocatore.h"
+using std::system;
 using std::cout;
 using std::endl;
 
 
 
 int main(){
-cout<<"(main) 10"<<endl;
+
 
 Griglia gr1, gr2;
 Portaerei p1, p2;
@@ -38,13 +40,15 @@ while(!g1.gethaPerso() && !g2.gethaPerso()){
     int*b = g2.spara();
   g2.feedback(g1.incassa(b),b);
   delete[] b;
-}
+ }
 }
 
 if(g1.gethaPerso()){
+  system("cls");
   cout<<"Giocatore2 ha vinto"<<endl;
 }
 else{
+  system("cls");
   cout<<"Giocatore1 ha vinto"<<endl;
 }
 

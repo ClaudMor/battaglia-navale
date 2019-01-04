@@ -12,7 +12,6 @@ using std::endl;
 
 
 Giocatore::Giocatore(Griglia grgl, Portaerei p, Corazzata c, Incrociatore i, Sottomarino s, Cacciatorpediniere ct, string name){
-  cout<<"(Giocatore) 12: constructor called"<<endl;
   this -> griglia = grgl;
   this -> nome = name;
   this -> navi.push_back(p);
@@ -27,11 +26,11 @@ void Giocatore::posiziona(){
   vector<Nave>::iterator it;
   for(it = navi.begin(); it != navi.end(); it++){
     std::system("cls");
-    cout<<"turno: "<<getNome()<<endl;
+    cout<<"turno: "<<getNome()<<endl<<endl;
     griglia.draw();
     do {
       if(intersez){
-        cout<<"intersezione, per favore riposiziona l'ultima nave"<<endl;
+        cout<<"intersezione, per favore riposiziona l'ultima nave"<<endl<<endl;
       }
       cin >> *it;
       for(int i = 0; i < (*it).getSize() ; i++){
@@ -68,15 +67,23 @@ bool Giocatore::incassa(int *a){
   bool colpito = true;
   if(griglia.getm1(a[0], a[1]) == '_'){
   griglia.setm1('m', a[0], a[1]);
-  cout<<"Mancato!"<<endl;
+  std::system("cls");
+  cout<<"Mancato!"<<endl<<endl;
+  std::system("pause");
   colpito = false;
+ }
+ if(griglia.getm1(a[0],a[1]) == '0'){
+   std::system("cls");
+   cout<<"Sprecato!"<<endl<<endl;
+   std::system("pause");
  }
  if(griglia.getm1(a[0], a[1]) == 'x'){
      griglia.setm1('0', a[0], a[1]);
-     cout<<"Colpito!";
+     std::system("cls");
+     cout<<"Colpito!"<<endl<<endl;
+     std::system("pause");
      colpito = true;
  }
-
  if(!griglia.isX()){
    haPerso = true;
  }
@@ -86,9 +93,9 @@ return colpito;
 
 int* Giocatore::spara(){
   std::system("cls");
-  cout<<"turno: "<<getNome()<<endl;
+  cout<<"turno: "<<getNome()<<endl<<endl;
   griglia.draw();
-  cout<<getNome()<< " decidi dove sparare!"<<endl;
+  cout<<getNome()<< " decidi dove sparare!"<<endl<<endl;
 
   int* a = new int[2];
   cout<<"riga del proiettile =  ";
