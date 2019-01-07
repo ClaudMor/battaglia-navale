@@ -98,11 +98,31 @@ int* Giocatore::spara(){
   cout<<getNome()<< " decidi dove sparare!"<<endl<<endl;
 
   int* a = new int[2];
+  bool notvalid = false;
+  do{
+    if(notvalid){
+      cout<<"Coordinate non valide, prego ripetere: "<<endl;
+    }
+    notvalid = false;
   cout<<"riga del proiettile =  ";
   cin>> a[0];
+  if(cin.fail() || a[0]<0 || a[0]>7){
+    notvalid = true;
+    cin.clear();
+    cin.ignore(70, '\n');
+    goto label;
+  }
   cout<<endl<<"colonna del proiettile = ";
   cin>> a[1];
+  if(cin.fail() || a[1]<0 || a[1]>7){
+    notvalid = true;
+    cin.clear();
+    cin.ignore(70, '\n');
+    goto label;
+  }
   cout<<endl;
+  label: ;
+}while(notvalid);
 
 
 
