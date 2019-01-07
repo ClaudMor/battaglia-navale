@@ -24,9 +24,8 @@ size = 8;
   }
   }
 
-
 /*Griglia::~Griglia(){
-  for(int i = 0; i<size; i++){
+ for(int i = 0; i<size; i++){
     delete[] m1[i];
     delete[] m2[i];
   }
